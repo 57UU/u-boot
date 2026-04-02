@@ -159,6 +159,8 @@
 	"ramdisk_addr_r=" RAMDISK_ADDR_R "\0" \
 	"fdtfile=" FDTFILE_NAME "\0" \
 	"dfu_alt_info=fitimage ram " KERNEL_ADDR_R " 0x4000000 \0" \
+	"splashimage=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
+	"splashpos=m,m\0" \
 	BOOTENV
 #endif
 
