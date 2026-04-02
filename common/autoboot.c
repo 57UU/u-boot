@@ -379,7 +379,11 @@ static int abortboot_key_sequence(int bootdelay)
 
 static void print_boot_delay(int bootdelay)
 {
+#ifdef CONFIG_AUTOBOOT_PROMPT
+	printf(ANSI_CLEAR_LINE CONFIG_AUTOBOOT_PROMPT, bootdelay);
+#else
 	printf(ANSI_CLEAR_LINE "\rHit any key to stop autoboot: %d", bootdelay);
+#endif
 }
 
 static int abortboot_single_key(int bootdelay)
