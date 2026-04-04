@@ -38,6 +38,21 @@
 	reg-names = "hdmitx", "hhi";
 };
 
+&sd_emmc_a {
+	/delete-property/ assigned-clocks;
+	/delete-property/ assigned-clock-rates;
+};
+
+&sd_emmc_b {
+	/delete-property/ assigned-clocks;
+	/delete-property/ assigned-clock-rates;
+};
+
+&sd_emmc_c {
+	/delete-property/ assigned-clocks;
+	/delete-property/ assigned-clock-rates;
+};
+
 #if defined(CONFIG_BINMAN)
 /* binman configuration on GXBB and GXL */
 
