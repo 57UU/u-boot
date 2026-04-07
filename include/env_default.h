@@ -134,6 +134,7 @@ const char default_environment[] = {
 #ifdef	CFG_EXTRA_ENV_SETTINGS
 	CFG_EXTRA_ENV_SETTINGS
 #endif
+#include <env_tauchgang.h>
 #ifdef CONFIG_OF_SERIAL_BAUD
 	/* Padding for baudrate at the end when environment is writable */
 	"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
