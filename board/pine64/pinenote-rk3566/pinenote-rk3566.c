@@ -38,7 +38,6 @@ int rockchip_dnl_key_pressed(void)
 static struct efi_fw_image fw_images[PINENOTE_UPDATABLE_IMAGES] = {0};
 
 struct efi_capsule_update_info update_info = {
-	.dfu_string = "mmc 0=u-boot-rockchip.bin raw 0x40 0x20000",
 	.num_images = PINENOTE_UPDATABLE_IMAGES,
 	.images = fw_images,
 };
