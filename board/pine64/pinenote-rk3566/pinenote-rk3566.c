@@ -11,12 +11,12 @@
 
 #define KEY_DOWN_MIN_VAL        0
 #define KEY_DOWN_MAX_VAL        30
-#define PINENOTE_UPDATABLE_IMAGES	2
+#define PINENOTE_UPDATABLE_IMAGES	1
 
-// UUID: 582BC3E1-FD7C-5148-8E45-6C2D2AE3B47E
+// UUID: CEF649E4-CA00-5302-88D6-12FFDD871C8A
 #define PINENOTE_UBOOT_IMAGE_GUID \
-	EFI_GUID(0x582bc3e1, 0xfd7c, 0x5148, 0x8e, 0x45, \
-		0x6c, 0x2d, 0x2a, 0xe3, 0xb4, 0x7e)
+	EFI_GUID(0xcef649e4, 0xca00, 0x5302, 0x88, 0xd6, \
+		0x12, 0xff, 0xdd, 0x87, 0x1c, 0x8a)
 
 int rockchip_dnl_key_pressed(void)
 {
@@ -38,6 +38,7 @@ int rockchip_dnl_key_pressed(void)
 static struct efi_fw_image fw_images[PINENOTE_UPDATABLE_IMAGES] = {0};
 
 struct efi_capsule_update_info update_info = {
+	.dfu_string = "mmc 0=u-boot-rockchip.bin raw 0x40 0x20000",
 	.num_images = PINENOTE_UPDATABLE_IMAGES,
 	.images = fw_images,
 };
