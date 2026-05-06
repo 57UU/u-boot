@@ -13,10 +13,10 @@
 #define KEY_DOWN_MAX_VAL        30
 #define PINENOTE_UPDATABLE_IMAGES	1
 
-// UUID: CEF649E4-CA00-5302-88D6-12FFDD871C8A
+// UUID: 582bc3e1-fd7c-5148-8e45-6c2d2ae3b47e
 #define PINENOTE_UBOOT_IMAGE_GUID \
-	EFI_GUID(0xcef649e4, 0xca00, 0x5302, 0x88, 0xd6, \
-		0x12, 0xff, 0xdd, 0x87, 0x1c, 0x8a)
+	EFI_GUID(0x582bc3e1, 0xfd7c, 0x5148, 0x8e, 0x45, \
+		0x6c, 0x2d, 0x2a, 0xe3, 0xb4, 0x7e)
 
 int rockchip_dnl_key_pressed(void)
 {
