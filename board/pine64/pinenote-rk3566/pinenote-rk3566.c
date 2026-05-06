@@ -13,15 +13,10 @@
 #define KEY_DOWN_MAX_VAL        30
 #define PINENOTE_UPDATABLE_IMAGES	2
 
-// UUID: B48DD0E3-2342-5704-A97C-40A65CF83FD5
-#define PINENOTE_IDBLOADER_IMAGE_GUID \
-	EFI_GUID(0xb48dd0e3, 0x2342, 0x5704, 0xa9, 0x7c, \
-		 0x40, 0xa6, 0x5c, 0xf8, 0x3f, 0xd5)
-
-// UUID: CB2A307D-DEF1-5238-954F-0C7BABF6B078
+// UUID: 582BC3E1-FD7C-5148-8E45-6C2D2AE3B47E
 #define PINENOTE_UBOOT_IMAGE_GUID \
-	EFI_GUID(0xcb2a307d, 0xdef1, 0x5238, 0x95, 0x4f, \
-		 0x0c, 0x7b, 0xab, 0xf6, 0xb0, 0x78)
+	EFI_GUID(0x582bc3e1, 0xfd7c, 0x5148, 0x8e, 0x45, \
+		0x6c, 0x2d, 0x2a, 0xe3, 0xb4, 0x7e)
 
 int rockchip_dnl_key_pressed(void)
 {
@@ -59,15 +54,11 @@ static bool board_is_pinenote(void)
 void rockchip_capsule_update_board_setup(void)
 {
 	if (board_is_pinenote()) {
-		efi_guid_t idbldr_image_type_guid =
-			PINENOTE_IDBLOADER_IMAGE_GUID;
 		efi_guid_t uboot_image_type_guid = PINENOTE_UBOOT_IMAGE_GUID;
 
-		guidcpy(&fw_images[0].image_type_id, &idbldr_image_type_guid);
-		guidcpy(&fw_images[1].image_type_id, &uboot_image_type_guid);
+		guidcpy(&fw_images[0].image_type_id, &uboot_image_type_guid);
 
-		fw_images[0].fw_name = u"PINENOTE-IDBLOADER";
-		fw_images[1].fw_name = u"PINENOTE-UBOOT";
+		fw_images[0].fw_name = u"PINENOTE-UBOOT";
 	} else {
 		update_info.num_images = 0;
 	}
