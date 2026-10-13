@@ -1,0 +1,5 @@
+Xiaomi Mi 8 SE (xiaomi-sirius) Board
+M:	57U <ming57u@foxmail.com>
+S:	Maintained
+F:	board/xiaomi/sirius/
+F:	sirius-build.sh
