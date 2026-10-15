@@ -10,13 +10,13 @@
 #  ./sirius-build.sh
 # Env overrides:
 #   OUT    O= build dir (default: <uboot>/build-sirius, gitignored)
-#   IMG    output boot image (default: <distro>/boot/boot_uboot_extlinux.img, gitignored)
+#   IMG    output boot image (default: <distro>/build/boot.img, gitignored)
 #   CROSS_COMPILE / JOBS / DEVICE_TREE as usual.
 set -e
 UBOOT="$(cd "$(dirname "$0")" && pwd)"
 DISTRO="$(cd "$UBOOT/.." && pwd)"
 OUT=${OUT:-$UBOOT/build-sirius}
-IMG=${IMG:-$DISTRO/boot/boot_uboot_extlinux.img}
+IMG=${IMG:-$DISTRO/build/boot.img}
 CROSS=${CROSS_COMPILE:-aarch64-linux-gnu-}
 JOBS=${JOBS:-$(nproc)}
 DT=${DEVICE_TREE:-qcom/sdm710-xiaomi-sirius}
