@@ -6,18 +6,23 @@
 #  DEVICE_TREE=qcom/sdm710-xiaomi-sirius, payload = gzip(u-boot-nodtb.bin) + sirius.dtb,
 #  mkbootimg --kernel_offset 0x8000 --pagesize 4096.
 #
-# Run on the build host (WSL with aarch64 toolchain + mkbootimg):
+# Run on the build host (needs aarch64 compiler + mkbootimg; aarch64 hosts build
+# natively, other hosts use the aarch64 cross toolchain):
 #  ./sirius-build.sh
 # Env overrides:
-#   OUT    O= build dir (default: <uboot>/build-sirius, gitignored)
+#   OUT    O= build dir (default: <distro>/workspace/build/uboot, gitignored)
 #   IMG    output boot image (default: <distro>/build/boot.img, gitignored)
 #   CROSS_COMPILE / JOBS / DEVICE_TREE as usual.
 set -e
 UBOOT="$(cd "$(dirname "$0")" && pwd)"
 DISTRO="$(cd "$UBOOT/.." && pwd)"
-OUT=${OUT:-$UBOOT/build-sirius}
+OUT=${OUT:-${SCRATCH:-$DISTRO/workspace/build}/uboot}
 IMG=${IMG:-$DISTRO/build/boot.img}
-CROSS=${CROSS_COMPILE:-aarch64-linux-gnu-}
+case "$(uname -m)" in
+  aarch64|arm64) DEF_CROSS= ;;
+  *)             DEF_CROSS=aarch64-linux-gnu- ;;
+esac
+CROSS=${CROSS_COMPILE-$DEF_CROSS}
 JOBS=${JOBS:-$(nproc)}
 DT=${DEVICE_TREE:-qcom/sdm710-xiaomi-sirius}
 echo "=== defconfig + fragments ==="
