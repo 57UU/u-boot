@@ -12,6 +12,7 @@
 # Env overrides:
 #   OUT    O= build dir (default: <distro>/workspace/build/uboot, gitignored)
 #   IMG    output boot image (default: <distro>/build/boot.img, gitignored)
+#   ENV_FILE  default env text file to compile in instead of board/xiaomi/sirius/sirius.env
 #   CROSS_COMPILE / JOBS / DEVICE_TREE as usual.
 set -e
 UBOOT="$(cd "$(dirname "$0")" && pwd)"
@@ -28,7 +29,14 @@ DT=${DEVICE_TREE:-qcom/sdm710-xiaomi-sirius}
 echo "=== defconfig + fragments ==="
 make -C "$UBOOT" CROSS_COMPILE="$CROSS" O="$OUT" qcom_defconfig qcom-phone.config sirius.config
 echo "=== build $DT ==="
-make -C "$UBOOT" CROSS_COMPILE="$CROSS" O="$OUT" -j"$JOBS" DEVICE_TREE="$DT"
+# ENV_FILE replaces the default env text without touching the source tree:
+# the path is a normal make variable, so a command-line assignment wins over
+# the value in .config/auto.conf.
+ENV_ARGS=()
+if [ -n "${ENV_FILE:-}" ]; then
+  ENV_ARGS=("CONFIG_ENV_DEFAULT_ENV_TEXT_FILE=$ENV_FILE")
+fi
+make -C "$UBOOT" CROSS_COMPILE="$CROSS" O="$OUT" -j"$JOBS" DEVICE_TREE="$DT" "${ENV_ARGS[@]}"
 echo "=== payload + boot image ==="
 gzip -c "$OUT/u-boot-nodtb.bin" > "$OUT/u-boot-nodtb.bin.gz"
 DTB="$OUT/dts/upstream/src/arm64/qcom/sdm710-xiaomi-sirius.dtb"
